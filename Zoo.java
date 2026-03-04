@@ -5,8 +5,7 @@ public class Zoo {
     // ===== Instance Variables =====
     // Create (but do not instantiate) a private instance variable called "cages".
     // This variable is an ArrayList of Cages.
-
-
+   private ArrayList<Cage> cages;
     // ===== Constructors =====
 
     /**
@@ -17,6 +16,10 @@ public class Zoo {
     public Zoo() {
         // TODO: instantiate cages
         // TODO: add 3 new Cage() objects to cages
+        cages = new ArrayList<Cage>();
+        cages.add(new Cage());
+        cages.add(new Cage());
+        cages.add(new Cage());
     }
 
     /**
@@ -27,6 +30,9 @@ public class Zoo {
     public Zoo(int numCages) {
         // TODO: instantiate cages
         // TODO: add numCages cages (each should start with at least one animal)
+        for (int i = 0; i < numCages; i++) {
+           cages.add(new Cage());
+        }
     }
 
     // ===== Methods =====
@@ -37,7 +43,7 @@ public class Zoo {
      */
     public int howManyAnimals() {
         // TODO: return Animal.getAnimalCount()
-        return 0;
+        return Animal.getAnimalCount();
     }
 
     /**
@@ -50,7 +56,12 @@ public class Zoo {
         // 1) check whether 'cage' is in 'cages'
         // 2) if yes, add animal to that cage and return true
         // 3) otherwise return false
-        return false;
+        if (cages.contains(cage)) {
+            cage.addAnimal(animal);
+            return true;
+         } else {
+            return false;
+         }
     }
 
     /**
@@ -61,9 +72,15 @@ public class Zoo {
         // TODO:
         // - verify from and to are in this Zoo
         // - verify animal is in from
-        // - remove from 'from' and add to 'to'
+        // - remove from 'from' and add to 'to' 
+        if (cages.contains(from) && cages.contains(to)) {
+            from.removeAnimal(animal);
+            to.addAnimal(animal);
+            return true;
+         } else {
         return false;
-    }
+        }
+    } 
 
     // ===== Getters =====
 
@@ -73,32 +90,43 @@ public class Zoo {
 
     public Cage getCageAtIndex(int index) {
         // TODO: return cage at index (or null if invalid)
-        return null;
+        if (index <= cages.size() && index >= 0) {
+         return cages.get(index);
+        }
+         return null;
     }
 
     public String toString() {
         // TODO: return a readable multi-line summary of the zoo and its cages
         // (How many cages, and each cage's contents.)
-        return "";
+        String sentance = "There are " + cages.size() + " cages \n";
+        
+        return sentance;
     }
 
     // ===== Main for Testing (not graded) =====
     public static void main(String[] args) {
 
         // Create a zoo with default constructor
-        
+        Zoo zoo1 = new Zoo();
         // Demonstrate howManyAnimals
-        
+        System.out.println(zoo1.howManyAnimals());
         // Try adding a new animal into cage 0
-        
+        Animal anAnimal = new Animal("Monkey");
+        zoo1.putAnimalInCage(zoo1.getCageAtIndex(0), anAnimal);
         // Move an animal from one cage to another
-        
+        System.out.println("Animal was moved: " + zoo1.moveAnimal(zoo1.getCageAtIndex(0), zoo1.getCageAtIndex(1), anAnimal));
+        System.out.println(zoo1.toString());
         // Move an animal from one cage to a cage that doesn't exist in this Zoo and see what gets
         // returned from moveAnimal
-        
+        Animal anotherAnimal = new Animal("Giraffe");
+        zoo1.putAnimalInCage(zoo1.getCageAtIndex(0), anotherAnimal);
+        System.out.println(zoo1.moveAnimal(zoo1.getCageAtIndex(0), zoo1.getCageAtIndex(112), anotherAnimal));
+
         // Try adding to a cage that does NOT belong to this zoo
-        
+        Animal theLastAnimal = new Animal("Elephant");
+        System.out.println(zoo1.putAnimalInCage(zoo1.getCageAtIndex(70), theLastAnimal));
         // Speak demo
-        
+        System.out.println(zoo1.getCageAtIndex(1).getAnimalAtIndex(0).speak());
     }
 }

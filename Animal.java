@@ -61,7 +61,7 @@ public class Animal {
         // TODO: return a sound depending on animalType
         // Example idea:
         // if (animalType.equals("Lion")) return "Roar!";
-        if (animalType.equals("Lion")) return "Roar!";
+        if (animalType.equals("Lion")) return "mew!";
         if (animalType.equals("Bear")) return "Growl!";
         if (animalType.equals("Elephant")) return "Trumpet!";
         if (animalType.equals("Giraffe")) return "Grunt!";

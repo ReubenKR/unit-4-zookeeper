@@ -15,6 +15,9 @@ public class Cage {
     public Cage() {
         // TODO: instantiate animals
         // TODO: add at least one new Animal() to the list
+        Animal animal = new Animal();
+        animals = new ArrayList<Animal>();
+        animals.add(animal);
     }
 
     /**
@@ -25,17 +28,24 @@ public class Cage {
     public Cage(Animal animal) {
         // TODO: instantiate animals
         // TODO: add provided animal
+        animals = new ArrayList<Animal>();
+        animals.add(animal);
     }
 
     // ===== Getters / Setters (careful!) =====
     public int getNumAnimals() {
         // TODO: return the number of animals in the cage
-        return 0;
+        
+        return animals.size();
     }
 
     public Animal getAnimalAtIndex(int index) {
         // TODO: return the animal at index (or null if invalid)
-        return null;
+        if (index < 0 || index > animals.size()) {
+           return null;
+        } else {
+           return animals.get(index);
+        }
     }
 
     // ===== Behaviors =====
@@ -43,21 +53,25 @@ public class Cage {
     /**
      * REQUIRED: add an animal;
      */
-    public void addAnimal(Animal animal) {
-
-    }
+      public void addAnimal(Animal animal) {
+         animals.add(animal);
+      }
 
     /**
      * REQUIRED: remove an animal if it exists; return true if removed.
      */
     public void removeAnimal(Animal animal) {
-
+      animals.remove(animal);
     }
 
     @Override
     public String toString() {
         // TODO: return a friendly description including all animals
         // Example: "Cage with 3 animals: [Animal{...}, Animal{...}]"
-        return "";
+        String sentance = "there are " + animals.size() + " animals in the cage \n";
+        for (int i = 0; i < animals.size(); i++) {
+        sentance += "there is a " + animals.get(i) + " in this cage \n";
+        }
+        return sentance;
     }
 }
