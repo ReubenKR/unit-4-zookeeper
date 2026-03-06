@@ -30,6 +30,10 @@ public class Zoo {
     public Zoo(int numCages) {
         // TODO: instantiate cages
         // TODO: add numCages cages (each should start with at least one animal)
+        cages = new ArrayList<Cage>();
+        cages.add(new Cage());
+        cages.add(new Cage());
+        cages.add(new Cage());
         for (int i = 0; i < numCages; i++) {
            cages.add(new Cage());
         }
